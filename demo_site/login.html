@@ -1,0 +1,9 @@
+<!doctype html><html><head><title>Demo Shop</title></head><body>
+<h1>Demo Shop</h1>
+<div id="login"><form onsubmit="event.preventDefault();
+ if(email.value==='customer@demo.test'&&pw.value==='secret'){document.getElementById('login').hidden=true;document.getElementById('dash').hidden=false;}
+ else{err.hidden=false;}">
+<label>Email <input id="email"></label> <label>Password <input id="pw" type="password"></label>
+<button>Sign in</button><p id="err" hidden>Invalid credentials</p></form></div>
+<div id="dash" hidden><h2>Customer Dashboard</h2><p>Welcome back, Customer!</p></div>
+</body></html>

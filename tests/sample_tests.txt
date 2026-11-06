@@ -1,0 +1,3 @@
+# One test per line.
+Open https://phptravels.com/demo and verify the page has a form asking for a name and email to request a demo
+Open https://phptravels.com/demo and verify that submitting the form with all fields empty does not succeed and shows validation
