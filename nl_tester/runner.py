@@ -50,6 +50,8 @@ def run_test(case, brain, start_url=None, headed=False, max_steps=25, shots_dir=
                      ("The browser is already on the start page.\n\n" if start_url else
                       "No start URL was given: take it from the test case and use goto.\n\n"))
             snap0 = _snap(page)
+            observe = getattr(brain, "observe", lambda _s: None)
+            observe(snap0)
             items_by_id = {x["id"]: x for x in snap0["items"]}
             messages = [{"role": "user", "content": intro + "CURRENT PAGE:\n" + render(snap0)}]
             for i in range(1, max_steps + 1):
@@ -90,10 +92,10 @@ def run_test(case, brain, start_url=None, headed=False, max_steps=25, shots_dir=
                     except Exception:
                         pass
                 snap = _snap(page)
+                observe(snap)
                 items_by_id = {x["id"]: x for x in snap["items"]}
-                messages.append({"role": "user", "content": [{
-                    "type": "tool_result", "tool_use_id": tid,
-                    "content": f"{note}\n\nCURRENT PAGE:\n{render(snap)}"}]})
+                messages.append({"role": "user", "content":
+                                 f"Result of your last action: {note}\n\nCURRENT PAGE:\n{render(snap)}"})
             else:
                 result.update(verdict="FAIL", reason=f"No verdict after {max_steps} steps.")
         except Exception as e:

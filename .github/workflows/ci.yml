@@ -9,3 +9,5 @@ jobs:
         with: { python-version: "3.12" }
       - run: pip install -r requirements.txt && playwright install --with-deps chromium
       - run: python tests/test_plumbing.py
+      - run: python tests/test_llm_http.py
+      - run: python tests/test_rules.py

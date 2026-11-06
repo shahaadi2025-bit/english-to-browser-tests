@@ -1,4 +1,4 @@
-# Isolated runner: docker build -t nl-tester . && docker run --rm -e ANTHROPIC_API_KEY nl-tester "your test" --url https://example.com
+# Isolated runner: docker build -t nl-tester . ; docker run --rm -e OLLAMA_HOST=http://host.docker.internal:11434 nl-tester "your test" --url https://example.com
 FROM python:3.12-slim
 WORKDIR /app
 COPY requirements.txt .

@@ -1,3 +1,6 @@
-# One test per line.
-Open https://phptravels.com/demo and verify the page has a form asking for a name and email to request a demo
-Open https://phptravels.com/demo and verify that submitting the form with all fields empty does not succeed and shows validation
+# One test per line. Works in rules mode (no AI model needed).
+Open https://phptravels.com/demo and verify the page has a form asking for a name and email
+Open https://example.com and verify "Example Domain" is shown
+Open https://example.com and verify the page shows a checkout button
+# Needs an AI model (free-form wording):
+# Open https://phptravels.com/demo and verify that submitting the form with all fields empty does not succeed and shows validation

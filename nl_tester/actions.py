@@ -82,4 +82,6 @@ def run_action(page, name, args, allowed=None):
     if name == "wait":
         page.wait_for_timeout(int(min(float(args.get("seconds", 1)), 10) * 1000))
         return "waited"
+    if name == "error":
+        raise ValueError(args.get("message", "invalid reply") + ". Reply with ONE valid JSON object only.")
     raise ValueError(f"unknown action {name}")
