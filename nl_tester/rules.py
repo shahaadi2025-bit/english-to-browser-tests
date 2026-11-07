@@ -183,6 +183,8 @@ class RulesBrain:
     # ---- brain interface ----
     def next_step(self, messages):
         self.n += 1
+        if len(messages) == 1:            # a new test starts: forget everything from the previous one
+            self.queue, self.tries = None, 0
         if self.queue is None:
             case = messages[0]["content"].split("TEST CASE:\n", 1)[-1].split("\n\nThe browser", 1)[0].split("\n\nNo start URL", 1)[0]
             self.queue = [p for st in split_steps(case) for p in expand(st)]

@@ -32,6 +32,13 @@ for case, url, want in CASES:
     ok = r["verdict"] == want
     bad += not ok
     print(("ok  " if ok else "BAD ") + f"{want:<7} got {r['verdict']:<7} | {case[:60]}  -> {r['reason'][:70]}")
+# regression: ONE brain object reused for several tests (as run_test.py does) must not leak state
+shared = RulesBrain()
+for case, want in [('Verify "Demo Shop" is shown', "PASS"), ('Verify "Demo Shop" is shown', "PASS"),
+                   ("Verify the page shows a checkout button", "FAIL"), ('Verify "Demo Shop" is shown', "PASS")]:
+    r = run_test(case, shared, LOGIN, log=lambda *_: None)
+    assert r["verdict"] == want, (case, r["verdict"], r["reason"])
+print("shared-brain OK")
 assert not bad, f"{bad} rules test(s) failed"
 print("rules OK")
 
